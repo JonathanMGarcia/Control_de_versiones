@@ -1,0 +1,21 @@
+
+
+
+#ifndef LEDS_H_
+#define LEDS_H_
+
+#include <stdint.h>
+
+#define LED_ON (1u)
+#define LED_OFF (0u)
+
+#define RED_LED_BIT  (22u)
+#define BLUE_LED_BIT (21u)
+#define GREEN_LED_BIT (26u)
+
+void Led_green_on_off(uint8_t on_off);
+void Led_red_on_off(uint8_t on_off);
+void Led_blue_on_off(uint8_t on_off);
+
+
+#endif /* LEDS_H_ */

@@ -1,0 +1,69 @@
+
+#include <stdio.h>
+#include "board.h"
+#include "peripherals.h"
+#include "pin_mux.h"
+#include "clock_config.h"
+#include "MK64F12.h"
+#include "fsl_debug_console.h"
+#include "NVIC.h"
+#include "LEDs.h"
+
+#define ON  (1u)
+#define OFF (0u)
+
+int main(void) {
+
+	uint8_t pin_value_sw2 = CLEAR_PIN;
+	uint8_t pin_value_sw3 = CLEAR_PIN;
+
+	 BOARD_InitBootPins();
+
+//
+//	NVIC_setBASEPRI_threshold(PRIORITY_5);
+//	/**Enables and sets a particular interrupt and its priority*/
+//	NVIC_enableInterruptAndPriotity(PORTC_IRQ,PRIORITY_10);
+//	/**Enables and sets a particular interrupt and its priority*/
+//	NVIC_enableInterruptAndPriotity(PORTA_IRQ,PRIORITY_4);
+//
+//	EnableInterrupts;
+
+	 Led_green_on_off(ON);
+	 Led_green_on_off(OFF);
+
+	 Led_red_on_off(ON);
+	 Led_red_on_off(OFF);
+
+	 Led_blue_on_off(ON);
+	 Led_blue_on_off(OFF);
+
+
+
+    while(1) {
+
+
+    	pin_value_sw3 = SW_read_pin(SW3);
+    	pin_value_sw2 = SW_read_pin(SW2);
+
+    	if(FALSE == pin_value_sw3)
+    	{
+    		Led_green_on_off(ON);
+    	}
+    	else
+    	{
+    		Led_green_on_off(OFF);
+    	}
+
+    	if(FALSE == pin_value_sw2)
+    	{
+    		Led_red_on_off(ON);
+    	}
+    	else
+    	{
+    		Led_red_on_off(OFF);
+    	}
+
+
+    }
+    return 0 ;
+}

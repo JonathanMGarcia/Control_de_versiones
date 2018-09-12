@@ -1,0 +1,60 @@
+
+#include <LEDs_and_SWs.h>
+#include <stdio.h>
+#include "board.h"
+#include "peripherals.h"
+#include "pin_mux.h"
+#include "clock_config.h"
+#include "MK64F12.h"
+#include "fsl_debug_console.h"
+#include "NVIC.h"
+
+#define ON  (1u)
+#define OFF (0u)
+
+
+extern uint8_t Flag_sw3;
+extern uint8_t Flag_sw2;
+
+int main(void) {
+
+	BOARD_InitBootPins();
+
+
+	NVIC_setBASEPRI_threshold(PRIORITY_12);
+	/**Enables and sets a particular interrupt and its priority*/
+	NVIC_enableInterruptAndPriotity(PORTC_IRQ,PRIORITY_10);
+	/**Enables and sets a particular interrupt and its priority*/
+	NVIC_enableInterruptAndPriotity(PORTA_IRQ,PRIORITY_4);
+
+	EnableInterrupts;
+
+	 Led_green_on_off(ON);
+	 Led_green_on_off(OFF);
+
+	 Led_red_on_off(ON);
+	 Led_red_on_off(OFF);
+
+	 Led_blue_on_off(ON);
+	 Led_blue_on_off(OFF);
+
+
+
+    while(1) {
+
+    	if(TRUE == Flag_sw3)
+    	{
+    		Led_green_on_off(ON);
+    		Flag_sw3 = FALSE;
+    	}
+    	else if(TRUE == Flag_sw2)
+    	{
+    		Led_green_on_off(OFF);
+    		Flag_sw3 = FALSE;
+    	}
+
+
+
+    }
+    return 0 ;
+}

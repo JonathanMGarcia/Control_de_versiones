@@ -1,0 +1,9 @@
+**https://es.wikipedia.org/wiki/Control_de_versiones**
+(Sólo para leer conceptos básicos generales)
+
+**https://es.wikipedia.org/wiki/Git**
+(Sólo para leer conceptos generales)
+
+**https://git-scm.com/book/es/v1/Empezando-Acerca-del-control-de-versiones
+
+https://help.github.com/articles/set-up-git/

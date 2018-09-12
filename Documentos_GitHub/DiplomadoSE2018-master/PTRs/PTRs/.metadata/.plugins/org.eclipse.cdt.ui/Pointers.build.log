@@ -1,0 +1,57 @@
+17:42:39 **** Incremental Build of configuration Debug for project Pointers ****
+make -r -j4 all 
+Building file: ../source/main.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -DSDK_OS_BAREMETAL -DFSL_RTOS_BM -DSDK_DEBUGCONSOLE=0 -DCR_INTEGER_PRINTF -DPRINTF_FLOAT_ENABLE=0 -DCPU_MK64FN1M0VDC12 -DCPU_MK64FN1M0VDC12_cm4 -D__MCUXPRESSO -D__USE_CMSIS -DDEBUG -I../board -I../source -I../ -I../drivers -I../CMSIS -I../utilities -I../startup -O0 -fno-common -g3 -Wall -c -ffunction-sections -fdata-sections -ffreestanding -fno-builtin -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -D__REDLIB__ -specs=redlib.specs -MMD -MP -MF"source/main.d" -MT"source/main.o" -MT"source/main.d" -o "source/main.o" "../source/main.c"
+../source/main.c: In function 'main':
+../source/main.c:57:22: warning: initialization makes pointer from integer without a cast [-Wint-conversion]
+   uint8_t* const c = 3;
+                      ^
+../source/main.c:59:16: warning: duplicate 'const' declaration specifier [-Wduplicate-decl-specifier]
+  const uint8_t const d = 7;
+                ^~~~~
+../source/main.c:61:16: warning: unused variable 'm' [-Wunused-variable]
+  const uint8_t m = 25;
+                ^
+../source/main.c:59:22: warning: unused variable 'd' [-Wunused-variable]
+  const uint8_t const d = 7;
+                      ^
+../source/main.c:58:18: warning: variable 'e' set but not used [-Wunused-but-set-variable]
+   const uint8_t* e;
+                  ^
+../source/main.c:57:18: warning: unused variable 'c' [-Wunused-variable]
+   uint8_t* const c = 3;
+                  ^
+../source/main.c:56:16: warning: unused variable 'b' [-Wunused-variable]
+  const uint8_t b =2;
+                ^
+../source/main.c:55:10: warning: unused variable 'a' [-Wunused-variable]
+  uint8_t a = 2;
+          ^
+../source/main.c:53:11: warning: unused variable 'ptr' [-Wunused-variable]
+  uint8_t* ptr;
+           ^~~
+../source/main.c:51:16: warning: unused variable 'g' [-Wunused-variable]
+  uint8_t f=23, g;
+                ^
+Finished building: ../source/main.c
+ 
+Building target: Pointers.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -Xlinker -Map="Pointers.map" -Xlinker --gc-sections -Xlinker -print-memory-usage -Xlinker --sort-section=alignment -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -T Pointers_Debug.ld -o "Pointers.axf"  ./utilities/fsl_debug_console.o ./utilities/fsl_io.o ./utilities/fsl_log.o ./utilities/fsl_str.o  ./startup/startup_mk64f12.o  ./source/main.o ./source/semihost_hardfault.o  ./drivers/fsl_adc16.o ./drivers/fsl_clock.o ./drivers/fsl_common.o ./drivers/fsl_dspi.o ./drivers/fsl_ftfx_cache.o ./drivers/fsl_ftfx_controller.o ./drivers/fsl_ftfx_flash.o ./drivers/fsl_ftfx_flexnvm.o ./drivers/fsl_gpio.o ./drivers/fsl_i2c.o ./drivers/fsl_rtc.o ./drivers/fsl_smc.o ./drivers/fsl_uart.o  ./board/board.o ./board/clock_config.o ./board/peripherals.o ./board/pin_mux.o  ./CMSIS/system_MK64F12.o   
+Memory region         Used Size  Region Size  %age Used
+   PROGRAM_FLASH:        6120 B         1 MB      0.58%
+      SRAM_UPPER:        8456 B       192 KB      4.30%
+      SRAM_LOWER:          0 GB        64 KB      0.00%
+        FLEX_RAM:          0 GB         4 KB      0.00%
+Finished building target: Pointers.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "Pointers.axf"; # arm-none-eabi-objcopy -v -O binary "Pointers.axf" "Pointers.bin" ; # checksum -p MK64FN1M0xxx12 -d "Pointers.bin";
+   text	   data	    bss	    dec	    hex	filename
+   6120	      0	   8456	  14576	   38f0	Pointers.axf
+ 
+
+17:42:40 Build Finished (took 1s.87ms)
+

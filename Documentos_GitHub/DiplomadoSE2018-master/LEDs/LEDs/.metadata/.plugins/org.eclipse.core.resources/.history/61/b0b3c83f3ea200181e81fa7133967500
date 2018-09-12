@@ -1,0 +1,61 @@
+
+#include <LEDs_and_SWs.h>
+#include <stdio.h>
+#include "board.h"
+#include "peripherals.h"
+#include "pin_mux.h"
+#include "clock_config.h"
+#include "MK64F12.h"
+#include "fsl_debug_console.h"
+#include "NVIC.h"
+
+#define ON  (1u)
+#define OFF (0u)
+
+#define PORTC_IRQ (61u)
+#define PORTA_IRQ (59u)
+
+#define PRIORITY_4_SW2 4
+#define PRIORITY_4_SW3 4
+
+extern uint8_t Flag_sw3;
+extern uint8_t Flag_sw2;
+
+int main(void) {
+
+	BOARD_InitBootPins();
+
+	NVIC_EnableIRQ(PORTA_IRQ);
+
+	NVIC_SetPriority(PORTA_IRQ, PRIORITY_4_SW3);
+
+	NVIC_EnableIRQ(PORTC_IRQ);
+
+	NVIC_SetPriority(PORTC_IRQ, PRIORITY_4_SW2);
+
+	__enable_irq();
+
+
+
+	EnableInterrupts;
+
+
+
+    while(1) {
+
+    	if(TRUE == Flag_sw3)
+    	{
+    		Led_green_on_off(ON);
+    		Flag_sw3 = FALSE;
+    	}
+    	else if(TRUE == Flag_sw2)
+    	{
+    		Led_green_on_off(OFF);
+    		Flag_sw2 = FALSE;
+    	}
+
+
+
+    }
+    return 0 ;
+}

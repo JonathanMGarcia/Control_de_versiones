@@ -1,0 +1,6 @@
+13:11:42 **** Incremental Build of configuration Debug for project Switch_Case ****
+make -r -j4 all 
+make: Nothing to be done for `all'.
+
+13:11:42 Build Finished (took 298ms)
+

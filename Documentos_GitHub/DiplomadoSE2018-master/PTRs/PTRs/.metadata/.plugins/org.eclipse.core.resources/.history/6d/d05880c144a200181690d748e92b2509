@@ -1,0 +1,50 @@
+
+#include <LEDs_and_SWs.h>
+#include <stdio.h>
+#include "board.h"
+#include "peripherals.h"
+#include "pin_mux.h"
+#include "clock_config.h"
+#include "MK64F12.h"
+#include "fsl_debug_console.h"
+
+
+int main(void) {
+
+	Colors_t color_selector;
+
+	BOARD_InitBootPins();
+
+	Color_Blue();
+	Color_Red();
+	Color_Green();
+	Color_white();
+	Color_yellow();
+
+    while(1) {
+
+    	switch (color_selector) {
+			case RED:
+				Color_Red();
+				break;
+			case BLUE:
+				Color_Red();
+				break;
+			case GREEN:
+				Color_Red();
+				break;
+			case YELLOW:
+				Color_Red();
+				break;
+			case WHITE:
+				Color_white();
+				break;
+			default:
+				Color_OFF();
+				break;
+		}
+
+
+    }
+    return 0 ;
+}

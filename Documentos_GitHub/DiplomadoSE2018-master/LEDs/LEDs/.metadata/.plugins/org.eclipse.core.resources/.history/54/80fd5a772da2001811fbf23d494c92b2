@@ -1,0 +1,42 @@
+
+
+
+#include "LEDs.h"
+#include "fsl_gpio.h"
+
+void Led_green_on_off(uint8_t on_off)
+{
+	if(LED_ON == on_off)
+	{
+		 GPIO_ClearPinsOutput(GPIOE, 1u << 22u);
+
+	}
+	else
+	{
+		 GPIO_SetPinsOutput(GPIOE, 1u << 22u);
+	}
+}
+void Led_red_on_off(uint8_t on_off)
+{
+	if(LED_ON == on_off)
+	{
+		 GPIO_ClearPinsOutput(GPIOB, 1u << 22u);
+
+	}
+	else
+	{
+		 GPIO_SetPinsOutput(GPIOB, 1u << 22u);
+	}
+}
+void Led_blue_on_off(uint8_t on_off)
+{
+	if(LED_ON == on_off)
+	{
+		 GPIO_ClearPinsOutput(GPIOB, 1u << 22u);
+
+	}
+	else
+	{
+		 GPIO_SetPinsOutput(GPIOB, 1u << 22u);
+	}
+}

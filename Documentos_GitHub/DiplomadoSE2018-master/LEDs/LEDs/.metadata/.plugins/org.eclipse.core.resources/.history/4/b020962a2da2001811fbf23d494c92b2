@@ -1,0 +1,18 @@
+
+
+
+#include "LEDs.h"
+#include "fsl_gpio.h"
+
+void Led_green_on_off(uint8_t on_off)
+{
+
+}
+void Led_red_on_off(uint8_t on_off)
+{
+
+}
+void Led_blue_on_off(uint8_t on_off)
+{
+
+}

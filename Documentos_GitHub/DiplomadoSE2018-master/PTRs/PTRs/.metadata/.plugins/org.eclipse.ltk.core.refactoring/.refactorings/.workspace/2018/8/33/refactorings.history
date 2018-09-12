@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete 2 resources" deleteContents="false" description="Delete 2 resources" element1="/Switch_Case/source/semihost_hardfault.c" element2="/Switch_Case/source/Switch_Case.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1534525807312"/>&#x0A;<refactoring comment="Delete 2 resources" deleteContents="false" description="Delete 2 resources" element1="/PtrToFunctions/source/PtrToFunctions.c" element2="/PtrToFunctions/source/semihost_hardfault.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1534529423123"/>
+</session>

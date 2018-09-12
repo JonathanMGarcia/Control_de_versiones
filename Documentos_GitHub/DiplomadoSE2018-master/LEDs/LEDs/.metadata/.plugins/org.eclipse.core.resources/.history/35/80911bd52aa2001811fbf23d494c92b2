@@ -1,0 +1,84 @@
+
+#include <stdio.h>
+#include "board.h"
+#include "peripherals.h"
+#include "pin_mux.h"
+#include "clock_config.h"
+#include "MK64F12.h"
+#include "fsl_debug_console.h"
+#include "NVIC.h"
+
+
+int main(void) {
+
+
+	uint8 statePortC = 0;
+	uint8 statePortA = 0;
+
+	/**Activating the GPIOA, GPIOB and GPIOC clock gating*/
+	BOARD_InitBootPins();
+
+
+	GPIO_pinControlRegister(GPIO_B, BIT22, GPIO_MUX1);
+	GPIO_pinControlRegister(GPIO_B, BIT21, GPIO_MUX1);
+	GPIO_pinControlRegister(GPIO_B, BIT26, GPIO_MUX1);
+	PORTB->PCR[21] = PORT_PCR_MUX(1);
+	PORTB->PCR[22] = PORT_PCR_MUX(1);
+	/**Pin control configuration of GPIOA pin4 as a GPIO with pull-up resistor and interrupt in falling edge*/
+	PORTA->PCR[4] = GPIO_MUX1|GPIO_PE|GPIO_PS|INTR_FALLING_EDGE;
+	/**Pin control configuration of GPIOC pin6 as a GPIO with pull-up resistor and interrupt in falling edge*/
+	PORTC->PCR[6] = GPIO_MUX1|GPIO_PE|GPIO_PS|INTR_FALLING_EDGE;
+
+
+	/**Assigns a safe value to the output pin21 of the GPIOB*/
+	GPIOB->PDOR |= 0x00200000;/**Blue led off*/
+	GPIOB->PDOR |= 0x00400000;/**Read led off*/
+
+	/**Configures GPIOB pin21 as output*/
+	GPIOB->PDDR = 0x00200000;
+	/**Configures GPIOB pin22 as output*/
+	GPIOB->PDDR |= 0x00400000;
+	/**Configures GPIOC pin6 as input*/
+	GPIOC->PDDR &=~(0x40);
+	/**Sets the threshold for interrupts, if the interrupt has higher priority constant that the BASEPRI, the interrupt will not be attended*/
+	NVIC_setBASEPRI_threshold(PRIORITY_5);
+	/**Enables and sets a particular interrupt and its priority*/
+	NVIC_enableInterruptAndPriotity(PORTC_IRQ,PRIORITY_10);
+	/**Enables and sets a particular interrupt and its priority*/
+	NVIC_enableInterruptAndPriotity(PORTA_IRQ,PRIORITY_4);
+
+	EnableInterrupts;
+
+
+    while(1) {
+    	if(TRUE == GPIO_getIRQStatus(GPIO_C)){
+			if(statePortC)
+			{
+				GPIOB->PDOR |= 0x00200000;/**Blue led off*/
+			}
+			else
+			{
+				GPIOB->PDOR &= ~(0x00200000);/**Blue led on*/
+			}
+			statePortC = !statePortC;
+			GPIO_clearIRQStatus(GPIO_C);
+		}
+
+
+		if(TRUE == GPIO_getIRQStatus(GPIO_A)){
+			if(statePortA)
+			{
+				GPIOB->PDOR |= 0x00400000;/**Read led off*/
+			}
+			else
+			{
+				GPIOB->PDOR &= ~(0x00400000);/**Read led on*/
+			}
+			statePortA = !statePortA;
+			GPIO_clearIRQStatus(GPIO_A);
+		}
+
+
+    }
+    return 0 ;
+}

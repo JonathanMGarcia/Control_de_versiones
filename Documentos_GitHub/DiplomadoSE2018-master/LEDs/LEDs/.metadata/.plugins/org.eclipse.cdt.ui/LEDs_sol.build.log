@@ -1,0 +1,6 @@
+11:58:32 **** Incremental Build of configuration Debug for project LEDs_sol ****
+make -r -j4 all 
+make: Nothing to be done for `all'.
+
+11:58:33 Build Finished (took 144ms)
+
